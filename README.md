@@ -1,5 +1,5 @@
 # Vibely
-Daily aggregate music plays
+Daily aggregate
 
 ---
 
