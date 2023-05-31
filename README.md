@@ -35,4 +35,4 @@ The use a tool like postman to access the endpoints below.
 Request |       Endpoints                 |       Functionality
 --------|---------------------------------|--------------------------------
 POST    |  /upload                        |        Upload music file csv format (select binary for body in postman, click select file to upload file and send)
-POST    |  /download/task-id              |        Downloads daily aggregated data in csv format
+GET     |  /download/task-id              |        Downloads daily aggregated data in csv format
