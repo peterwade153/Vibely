@@ -21,6 +21,8 @@ git clone https://github.com/peterwade153/Vibely.git
 
 - Start the Docker deamon on the machine if its not running already. 
 
+- Updates Environment variable. Create a `.env` file from the `.env-sample` and replace thm with actual varibles.
+
 - Change directory to the folder where the project is cloned and run the command below.
 
 <pre>
@@ -34,5 +36,5 @@ The use a tool like postman to access the endpoints below.
 
 Request |       Endpoints                 |       Functionality
 --------|---------------------------------|--------------------------------
-POST    |  /upload                        |        Upload music file csv format (select binary for body in postman, click select file to upload file and send)
+POST    |  /upload                        |        Upload file csv format (select binary for body in postman, click select file to upload file and send)
 GET     |  /download/task-id              |        Downloads daily aggregated data in csv format
