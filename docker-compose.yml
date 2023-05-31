@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+  db:
+    image: mongo:4.0.8
+    container_name: mongodb
+    restart: unless-stopped
+    command: mongod --auth
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongodbuser
+      MONGO_INITDB_ROOT_PASSWORD: root_password
+      MONGODB_DATA_DIR: /data/db
+      MONDODB_LOG_DIR: /dev/null
+    volumes:
+      - mongodbdata:/data/db
+  redis:
+    image: "redis"
+    volumes:
+      - redis:/data
+    ports:
+      - "6378:6378"
+  web:
+    build: .
+    environment:
+      MONGO_URI: mongodb://mongodbuser:root_password@db:27017/
+      CELERY_BROKER_URL: redis://redis
+      CELERY_RESULT_BACKEND: redis://redis
+    volumes:
+      - .:/code
+    ports:
+      - "8080:5000"
+    depends_on:
+      - db
+    env_file:
+      - .env
+  worker:
+    build:
+      context: .
+    hostname: worker
+    entrypoint: celery
+    command: -A app.celery worker -l info
+    environment:
+      CELERY_BROKER_URL: redis://redis
+      CELERY_RESULT_BACKEND: redis://redis
+      MONGO_URI: mongodb://mongodbuser:root_password@db:27017/
+    volumes:
+      - .:/code
+    depends_on:
+      - redis
+      - db
+
+volumes:
+  mongodbdata:
+  redis:
