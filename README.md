@@ -1,5 +1,5 @@
 # Vibely
-Daily aggregate
+Daily aggregate for Music Streams from Uploaded CSV file.
 
 ---
 
